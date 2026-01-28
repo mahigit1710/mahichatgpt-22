@@ -10,7 +10,7 @@ pipeline{
     stages {
         stage('Checkout from Git'){
             steps{
-                git branch: 'master', url: 'https://github.com/vijay3639/Chat-gpt.git'
+                git branch: 'master', url: 'https://github.com/mahigit1710/mahichatgpt-22.git'
             }
         }
         stage('Install Dependencies') {
@@ -52,15 +52,15 @@ pipeline{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
                        sh "docker build -t chatbot ."
-                       sh "docker tag chatbot vijay3639/chatbot:latest "
-                       sh "docker push vijay3639/chatbot:latest "
+                       sh "docker tag chatbot mahigit1710/chatbot:latest "
+                       sh "docker push mahigit1710/chatbot:latest "
                     }
                 }
             }
         }
         stage("TRIVY"){
             steps{
-                sh "trivy image vijay3639/chatbot:latest > trivy.json"
+                sh "trivy image mahigit1710/chatbot:latest > trivy.json"
             }
         }
         stage ("Remove container") {
@@ -71,7 +71,7 @@ pipeline{
         }
         stage('Deploy to container'){
             steps{
-                sh 'docker run -d --name chatbot -p 3000:3000 vijay3639/chatbot:latest'
+                sh 'docker run -d --name chatbot -p 3000:3000 mahigit/chatbot:latest'
             }
         }
     }
