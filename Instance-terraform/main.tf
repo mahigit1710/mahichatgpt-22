@@ -31,7 +31,7 @@ resource "aws_security_group" "Jenkins-sg" {
 
 
 resource "aws_instance" "web" {
-  ami                    = "ami-0ba8d27d35e9915fb"  #change your ami value according to your aws instance
+  ami                    = "ami-019715e0d74f695be"  #change your ami value according to your aws instance
   instance_type          = "t2.large"
   key_name               = "linux1"
   vpc_security_group_ids = [aws_security_group.Jenkins-sg.id]
@@ -45,7 +45,7 @@ resource "aws_instance" "web" {
   }
 }
 resource "aws_instance" "web2" {
-  ami                    = "ami-0ba8d27d35e9915fb" #change your ami value according to your aws instance 
+  ami                    = "ami-019715e0d74f695be" #change your ami value according to your aws instance 
   instance_type          = "t2.medium"
   key_name               = "linux1"
   vpc_security_group_ids = [aws_security_group.Jenkins-sg.id]

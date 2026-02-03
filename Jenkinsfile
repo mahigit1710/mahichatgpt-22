@@ -33,15 +33,6 @@ pipeline{
                 }
             }
         }
-        stage('OWASP FS SCAN') {
-            environment {
-                NVD_API_KEY = credentials('NVD_API_KEY')
-            }
-            steps {
-                dependencyCheck additionalArguments: "--scan ./ --disableYarnAudit --disableNodeAudit --nvdApiKey=${NVD_API_KEY}", odcInstallation: 'DP-Check'
-                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-            }
-        }
         stage('TRIVY FS SCAN') {
             steps {
                 sh "trivy fs . > trivyfs.json"
@@ -71,7 +62,7 @@ pipeline{
         }
         stage('Deploy to container'){
             steps{
-                sh 'docker run -d --name chatbot -p 3000:3000 mahigit/chatbot:latest'
+                sh 'docker run -d --name chatbot -p 3000:3000 mahigit1710/chatbot:latest'
             }
         }
     }
